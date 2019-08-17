@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     return ( 
-        <div className="container-menu">
-            <div className="row">
-                <div className="col">
+        <div className="container">
+            <div className="row menu">
+                <div className="col-2">
                     
                         <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#menucollapse" aria-expanded="false" aria-controls="menucollapse">
                           Menú
@@ -13,8 +13,8 @@ const Header = () => {
                     
                 </div>
 
-                <div className="col">
-                    <Link className="sesion">
+                <div className="col-4 sesion">
+                    <Link>
                       Sign In
                     </Link>
                     <span>|</span>

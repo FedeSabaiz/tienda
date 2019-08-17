@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 // Componentes del cliente
 
@@ -8,6 +8,7 @@ import MostrarCliente from './components/clientes/MostrarCliente';
 import EditarCliente from './components/clientes/EditarCliente';
 import NuevoCliente from './components/clientes/NuevoCliente';
 import Cliente from './components/clientes/Cliente';
+import Carrito from './components/clientes/Carrito';
 
 // Componentes del artesano/vendedor
 
@@ -31,15 +32,21 @@ function App() {
         <Router>
 
             <Header />
-            <div className="container-prin">
-                <div class="collapse" id="menucollapse">
-                    <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </div>
-                </div>
+            <div className="container">
+                <nav class="collapse" id="menucollapse">
+                    <ul>
+                        <li>
+                            <Link to="./carrito">
+                                Carrito
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
                 <Switch>
                     <Route exact path="/artesanos" component={Artesanos} />
+
                     <Route exact path="/cliente" component={Cliente} />
+                    <Route exact path="/carrito" component={Carrito} />
                     
                 </Switch>
             </div>

@@ -6,19 +6,14 @@ body {
 }
 
 // Aquí se modifica el contenedor de los componentes diferentes a Header
-.container-prin {
-    position: absolute;
-}
 
-.container-menu {
-    display: flex;
-    // align-items: center;
-    // justify-content: center;
+.menu {
+    justify-content: space-between;
 }
 
 .sesion {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -27,6 +22,7 @@ body {
 #menucollapse {
     position: absolute;
     z-index: 100;
+    background: white;
 }
 
 // span.icon-bar {
