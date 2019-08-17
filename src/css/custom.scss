@@ -1,0 +1,37 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    background: black;
+    
+}
+
+// Aquí se modifica el contenedor de los componentes diferentes a Header
+.container-prin {
+    position: absolute;
+}
+
+.container-menu {
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+}
+
+.sesion {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+// En esta sección se modifica el botón de menú
+
+#menucollapse {
+    position: absolute;
+    z-index: 100;
+}
+
+// span.icon-bar {
+//     width: 50px;
+//     height: 50px;
+//     color: red;
+// }
+
