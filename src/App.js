@@ -1,11 +1,18 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Redux
 
-import store from './store';
+import createReduxStore from './createReduxStore';
 import { Provider } from 'react-redux';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+// Firebase
+import firebaseConfig from './config/keys';
 
 // Componentes del cliente
 
@@ -33,34 +40,61 @@ import Header from './components/layout/Header';
 import Menu from './components/layout/Menu';
 
 function App() {
+
+    // Configuración de firebase
+    const fbConfig = firebaseConfig;
+
+    // Configuración de react-redux-firebase
+    const rrfConfig = {
+        userProfile: 'users',
+        useFirestoreForProfile: true
+    }
+
+    // Inicializar intancia de firebase y firestore
+    firebase.initializeApp(fbConfig);
+    firebase.firestore();
+
+    // Creación del store con los reducers. Este últio viene con el estado inicial
+    const store = createReduxStore();
+
+    // Se crea el objeto rrfProps para concentrar la configuración a ReactReduxFirebaseProvider.
+    const rrfProps = {
+        firebase,
+        config: rrfConfig,
+        dispatch: store.dispatch,
+        createFirestoreInstance
+    }
+
     return (
         <Provider store={store}>
-            <Router>
+            <ReactReduxFirebaseProvider {...rrfProps} >
+                <Router>
 
-                <Header />
-                <div className="container">
-                    
-                    <Menu />
-
-                    <Switch>
-                        <Route exact path="/artesanos" component={Artesanos} />
-                        <Route exact path="/mostrar/artesano" component={MostrarArtesano} />
-                        <Route exact path="/nuevo-artesano" component={NuevoArtesano} />
-                        <Route exact path="/editar/artesano" component={EditarArtesano} />
-
-                        <Route exact path="/clientes" component={Clientes} />
-                        <Route exact path="/carrito" component={Carrito} />
-                        <Route exact path="/mostrar/cliente/:id" component={MostrarCliente} />
-                        <Route exact path="/nuevo-cliente" component={NuevoCliente} />
-                        <Route exact path="/editar/cliente" component={EditarCliente} />
+                    <Header />
+                    <div className="container">
                         
-                        <Route exact path="/productos" component={Productos} />
-                        <Route exact path="/mostrar/producto/:id" component={MostrarProducto} />
-                        <Route exact path="/nuevo-producto" component={NuevoProducto} />
-                        <Route exact path="/editar/producto" component={EditarProducto} />
-                    </Switch>
-                </div>
-            </Router>
+                        <Menu />
+
+                        <Switch>
+                            <Route exact path="/artesanos" component={Artesanos} />
+                            <Route exact path="/mostrar/artesano" component={MostrarArtesano} />
+                            <Route exact path="/nuevo-artesano" component={NuevoArtesano} />
+                            <Route exact path="/editar/artesano" component={EditarArtesano} />
+
+                            <Route exact path="/clientes" component={Clientes} />
+                            <Route exact path="/carrito" component={Carrito} />
+                            <Route exact path="/mostrar/cliente/:id" component={MostrarCliente} />
+                            <Route exact path="/nuevo-cliente" component={NuevoCliente} />
+                            <Route exact path="/editar/cliente" component={EditarCliente} />
+                            
+                            <Route exact path="/productos" component={Productos} />
+                            <Route exact path="/mostrar/producto/:id" component={MostrarProducto} />
+                            <Route exact path="/nuevo-producto" component={NuevoProducto} />
+                            <Route exact path="/editar/producto" component={EditarProducto} />
+                        </Switch>
+                    </div>
+                </Router>
+            </ReactReduxFirebaseProvider>
         </Provider>
     );
 }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Menu = () => {
     return ( 
-        <nav class="collapse" id="menucollapse">
+        <nav className="collapse" id="menucollapse">
             <ul>
                 <li className="nav-item">
                     <Link to="./carrito">
