@@ -1,7 +1,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 body {
-    background: black;
+    background: rgb(255, 255, 254);
     
 }
 
@@ -22,18 +22,41 @@ body {
 #menucollapse {
     position: absolute;
     z-index: 100;
-    background: white;
+    background: rgb(56, 51, 51);
 }
 
 // Diseño de la tabla de artesanos.
 .table {
-    color: wheat;
+    color: black;
 }
 
-
-// span.icon-bar {
-//     width: 50px;
-//     height: 50px;
-//     color: red;
-// }
-
+// Estilos del spiner de spinkit
+.spinner {
+    width: 400px;
+    height: 400px;
+    margin: 100px auto;
+    background-color: rgb(255, 253, 253);
+  
+    border-radius: 100%;  
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+  }
+  
+  @-webkit-keyframes sk-scaleout {
+    0% { -webkit-transform: scale(0) }
+    100% {
+      -webkit-transform: scale(1.0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes sk-scaleout {
+    0% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 100% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+      opacity: 0;
+    }
+  }

@@ -77,20 +77,20 @@ function App() {
 
                         <Switch>
                             <Route exact path="/artesanos" component={Artesanos} />
-                            <Route exact path="/mostrar/artesano" component={MostrarArtesano} />
+                            <Route exact path="/mostrar-artesano/:id" component={MostrarArtesano} />
                             <Route exact path="/nuevo-artesano" component={NuevoArtesano} />
-                            <Route exact path="/editar/artesano" component={EditarArtesano} />
+                            <Route exact path="/editar-artesano" component={EditarArtesano} />
 
                             <Route exact path="/clientes" component={Clientes} />
                             <Route exact path="/carrito" component={Carrito} />
-                            <Route exact path="/mostrar/cliente/:id" component={MostrarCliente} />
+                            <Route exact path="/mostrar-cliente/:id" component={MostrarCliente} />
                             <Route exact path="/nuevo-cliente" component={NuevoCliente} />
-                            <Route exact path="/editar/cliente" component={EditarCliente} />
+                            <Route exact path="/editar-cliente" component={EditarCliente} />
                             
                             <Route exact path="/productos" component={Productos} />
-                            <Route exact path="/mostrar/producto/:id" component={MostrarProducto} />
+                            <Route exact path="/mostrar-producto/:id" component={MostrarProducto} />
                             <Route exact path="/nuevo-producto" component={NuevoProducto} />
-                            <Route exact path="/editar/producto" component={EditarProducto} />
+                            <Route exact path="/editar-producto" component={EditarProducto} />
                         </Switch>
                     </div>
                 </Router>

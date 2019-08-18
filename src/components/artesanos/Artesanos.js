@@ -1,21 +1,40 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import PropTypes from 'prop-types';
 
-const Artesanos = ( { artesanos } ) => {
+import Spinner from '../layout/Spinner';
+
+const Artesanos = ( { artesanos, firestore } ) => {
     
-    if(!artesanos) return <h1>Cargando...</h1>
-    console.log(artesanos.map((artesano, x)=>{
-        return artesano.Nombre
-    }));
-    
+    console.log(firestore);
+
+    if(!artesanos) {
+        return <Spinner />
+
+    }
+ 
+    // Eliminar artesanos
+    const eliminarArtesano = (id) => {
+        
+        //eliminar
+        firestore.delete({
+            collection: 'artesanos',
+            doc: id
+        })
+
+    }
 
     return ( 
         <div className="row">
             <div className="col-md-12 mb-4">
-                
+                <Link to="/nuevo-artesano" 
+                    className="btn btn-secondary mt-4"
+                >
+                    Nuevo Artesano
+                </Link>
             </div>
             <div className="col-md-8">
                 <h2>
@@ -29,8 +48,7 @@ const Artesanos = ( { artesanos } ) => {
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
-                        <th>Especialidad</th>
-                        <th>Cuenta</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 
@@ -39,8 +57,17 @@ const Artesanos = ( { artesanos } ) => {
                         <tr key={artesano.id}>
                             <td>{artesano.Nombre}</td>
                             <td>{artesano.Apellidos}</td>
-                            <td>{artesano.Especialidad}</td>
-                            <td>{artesano.Cuenta}</td>
+                            <td>
+                                <Link to={`/mostrar-artesano/${artesano.id}`}
+                                    className="btn btn-info btn-block" >
+                                    Mas información
+                                </Link>
+
+                                <button className="btn btn-danger btn-block"
+                                        type="button"
+                                        onClick={ () => eliminarArtesano(artesano.id) }
+                                >Eliminar artesano</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -48,6 +75,11 @@ const Artesanos = ( { artesanos } ) => {
         </div>
      );
 }
+Artesanos.propTypes = {
+    firestore : PropTypes.object.isRequired,
+    artesanos : PropTypes.array
+}
+
  
 export default compose(
     firestoreConnect([{ collection: 'artesanos' }]),
