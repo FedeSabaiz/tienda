@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 
 const Artesanos = ( { artesanos, firestore } ) => {
-    
-    console.log(firestore);
 
     if(!artesanos) {
         return <Spinner />
@@ -55,8 +53,8 @@ const Artesanos = ( { artesanos, firestore } ) => {
                 <tbody>
                     {artesanos.map(artesano => (
                         <tr key={artesano.id}>
-                            <td>{artesano.Nombre}</td>
-                            <td>{artesano.Apellidos}</td>
+                            <td>{artesano.nombre}</td>
+                            <td>{artesano.apellidos}</td>
                             <td>
                                 <Link to={`/mostrar-artesano/${artesano.id}`}
                                     className="btn btn-info btn-block" >

@@ -79,7 +79,7 @@ function App() {
                             <Route exact path="/artesanos" component={Artesanos} />
                             <Route exact path="/mostrar-artesano/:id" component={MostrarArtesano} />
                             <Route exact path="/nuevo-artesano" component={NuevoArtesano} />
-                            <Route exact path="/editar-artesano" component={EditarArtesano} />
+                            <Route exact path="/editar-artesano/:id" component={EditarArtesano} />
 
                             <Route exact path="/clientes" component={Clientes} />
                             <Route exact path="/carrito" component={Carrito} />
