@@ -8,7 +8,34 @@ import Spinner from '../layout/Spinner';
 import Artesanos from './Artesanos';
 
 class EditarArtesano extends React.Component {
-    state = {  }
+    // Refs para leer los cambios al formulario
+    nombreInput = React.createRef();
+    apellidosInput = React.createRef();
+    especialidadInput = React.createRef();
+    cuentaInput = React.createRef();
+
+    editarArtesano = e => {
+        e.preventDefault();
+
+        // Objeto que va a actualizar
+        const datosAct = {
+            nombre : this.nombreInput.current.value,
+            apellidos: this.apellidosInput.current.value,
+            especialidad: this.especialidadInput.current.value,
+            cuenta: this.cuentaInput.current.value
+        }
+
+        // Extraer firestore y history de props
+        const { artesano, firestore, history } = this.props;
+
+        // Almacenar en la base de datos co nfirestore
+        // Editar el artesano con los datos de datosAct
+        firestore.update({
+            collection: 'artesanos',
+            doc: artesano.id
+        }, datosAct ).then(history.push('/artesanos'))
+    }
+
     render() { 
 
         const { artesano } = this.props;
@@ -30,7 +57,7 @@ class EditarArtesano extends React.Component {
 
                     <div className="row justify-content-center">
                         <div className="col-md-8 mt-5">
-                            <form onSubmit={this.agregarArtesano}>
+                            <form onSubmit={this.editarArtesano}>
                                 <div className="form-group">
                                     <label htmlFor="">Nombre</label>
                                     <input 
@@ -39,7 +66,7 @@ class EditarArtesano extends React.Component {
                                         name="nombre"
                                         placeholder="Nombre del artesano"
                                         require="true"
-                                        onChange={this.leerDato}
+                                        ref={this.nombreInput}
                                         defaultValue={artesano.nombre}
                                     />
                                 </div>   
@@ -52,7 +79,7 @@ class EditarArtesano extends React.Component {
                                         name="apellidos"
                                         placeholder="Apellidos del artesano"
                                         require="true"
-                                        onChange={this.leerDato}
+                                        ref={this.apellidosInput}
                                         defaultValue={artesano.apellidos}
                                     />
                                 </div>
@@ -65,7 +92,7 @@ class EditarArtesano extends React.Component {
                                         name="especialidad"
                                         placeholder="Especialidad del artesano"
                                         require="true"
-                                        onChange={this.leerDato}
+                                        ref={this.especialidadInput}
                                         defaultValue={artesano.especialidad}
                                     />
                                 </div>
@@ -78,7 +105,7 @@ class EditarArtesano extends React.Component {
                                         name="cuenta"
                                         placeholder="Cuenta del artesano"
                                         require="true"
-                                        onChange={this.leerDato}
+                                        ref={this.cuentaInput}
                                         defaultValue={artesano.cuenta}
                                     />
                                 </div>
@@ -95,6 +122,9 @@ class EditarArtesano extends React.Component {
             </div>
          );
     }
+}
+EditarArtesano.porpTypes = {
+    firestore: PropTypes.object.isRequired
 }
  
 export default compose(
