@@ -42,7 +42,7 @@ class Header extends React.Component {
                         </button>
                         
                     </div>
-                    { usuarioAuth ? (
+                    { !usuarioAuth ? (
                         <div className="col-4 sesion">
                             <Link to={'/'}>
                               Sign In

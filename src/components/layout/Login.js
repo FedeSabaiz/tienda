@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
+import { withFirebase } from 'react-redux-firebase';
+import { UserIsNotAuthenticated } from '../../helpers/auth';
 import PropTypes from 'prop-types';
 
 class Login extends Component {
@@ -88,5 +91,9 @@ class Login extends Component {
 Login.propTypes = {
     firebase: PropTypes.object.isRequired
 }
- 
-export default firebaseConnect()(Login);
+
+export default compose(
+    firebaseConnect(),
+    UserIsNotAuthenticated,
+    withFirebase
+  )(Login);

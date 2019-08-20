@@ -11,6 +11,7 @@ import { createFirestoreInstance } from 'redux-firestore';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { UserIsAuthenticated } from './helpers/auth';
 
 // Firebase
 import firebaseConfig from './config/keys';
@@ -78,11 +79,10 @@ function App() {
                         <Menu />
 
                         <Switch>
-                            <Route exact path="/artesanos" component={Artesanos} />
-                            <Route exact path="/mostrar-artesano/:id" component={MostrarArtesano} />
-                            <Route exact path="/nuevo-artesano" component={NuevoArtesano} />
-                            <Route exact path="/editar-artesano/:id" component={EditarArtesano} />
-                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/artesanos" component={UserIsAuthenticated(Artesanos)} />
+                            <Route exact path="/mostrar-artesano/:id" component={UserIsAuthenticated(MostrarArtesano)} />
+                            <Route exact path="/nuevo-artesano" component={UserIsAuthenticated(NuevoArtesano)} />
+                            <Route exact path="/editar-artesano/:id" component={UserIsAuthenticated(EditarArtesano)} />
 
                             <Route exact path="/clientes" component={Clientes} />
                             <Route exact path="/carrito" component={Carrito} />
@@ -94,6 +94,7 @@ function App() {
                             <Route exact path="/mostrar-producto/:id" component={MostrarProducto} />
                             <Route exact path="/nuevo-producto" component={NuevoProducto} />
                             <Route exact path="/editar-producto" component={EditarProducto} />
+                            <Route exact path="/login" component={Login} />
                         </Switch>
                     </div>
                 </Router>
